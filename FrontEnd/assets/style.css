@@ -16,6 +16,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+	text-decoration: none;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -93,6 +94,8 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color:black;
+	
 }
 
 li:hover {
@@ -137,9 +140,53 @@ li:hover {
 	width: 100%;
 
 }
+
+ /*ajout style bouton filtres*/
+
+#portfolio .button-filter {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin: 51px 0;
+}
+
+#portfolio .button-filter button {
+	height: 37px;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	line-height: normal;
+	justify-content: center;
+	text-align: center;
+	padding: 9px 10px;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	cursor: pointer;
+	background-color: white;
+	transition: all 0.4s ease;
+}
+
+#portfolio .button-filter button:hover {
+	background-color: #1D6154;
+	color: white;
+	transform: scale(1.1);
+}
+
+
+/*style login*/
+.form{
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+} 
+
+
+/*fin style login*/
+
 #contact {
-	width: 50%;
-margin: auto;
+    width: 50%;
+    margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -174,7 +221,7 @@ input[type="submit"]{
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 32px auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;

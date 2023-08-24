@@ -12,30 +12,33 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
-    <script type="module" src="login.js"></script>
+    <script src="./modules/login.js"></script>
   </head>
   <body>
     <header>
            <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
         <nav>
            <ul>
-               <li> <a href="./index.html#portfolio">projets</a></li>
-               <li><a href="./index.html#contact">contact</a></li>
+               <a href="index.html"><li>projets</li></a>
+               <li>contact</li>
                <li>login</li>
                <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
           </ul>
         </nav>
    </header>
 <main>
+    <!--on creer le formulaire-->
   <section id="login">
     <h2>Log In</h2>
-    <form id="loginForm">
+    <form action="#" method="post" class="form"><!--les données vont être envoyées à la page qui contient le formulaire-->
       <label for="email">Email</label>
       <input type="email" name="email" id="email" required>
       <label for="motdepasse">Mot de passe</label>
       <input type="password" name="motdepasse" id="motdepasse" required>
-      <input type="submit" value="Se connecter">
+      <button type="submit">Se connecter</button>
     </form>
+    <span class="errormessage"></span>
+    <a href="#">Mot de passe oublié</a>
   </section>
 </main>
 <footer>
