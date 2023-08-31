@@ -65,22 +65,22 @@ buttonsCategories.forEach((button) => {
         workElement.style.display = "block";
       });
     } else {
-      // Sélection des éléments de travail correspondant à la catégorie du bouton
+      // sélection des éléments de travail correspondant à la catégorie du bouton
       const workElements = document.querySelectorAll(
         `[data-category="${category}"]`
       );
 
-      // Affichage des éléments de travail correspondants
+      // affichage des éléments de travail correspondants
       workElements.forEach((workElement) => {
         workElement.style.display = "block";
       });
 
-      // Sélection des autres éléments de travail qui ont une catégorie différente
+      // sélection des autres éléments de travail qui ont une catégorie différente
       const otherWorkElements = document.querySelectorAll(
         `[data-category]:not([data-category="${category}"])`
       );
 
-      // Masquage des autres éléments de travail
+      // masquage des autres éléments de travail
       otherWorkElements.forEach((workElement) => {
         workElement.style.display = "none";
       });
