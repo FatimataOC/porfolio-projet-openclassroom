@@ -20,16 +20,16 @@ formEl.addEventListener('submit', async (event) => {
     // récupérer le jeton d'authentification depuis la réponse de l'API
     const token = await response.json();
     console.log(token) 
+  // enregistrer le jeton d'authentification dans le stockage local
+  localStorage.setItem('token', token.token);
+  localStorage.setItem('userId', token.userId);
 
-    // enregistrer le jeton d'authentification dans le stockage local
-    localStorage.setItem('token', token.token);
-    localStorage.setItem('userId', token.userId);
+  // redirige l'utilisateur vers la page d'accueil  
+  window.location.href = './index.html';
 
-    // redirige l'utilisateur vers la page d'accueil  
-    window.location.href = './index.html';
-
-  } else {
-    // afficher un message d'erreur si les informations de connexion sont invalides
-    error.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
-  }
+} else {
+  // afficher un message d'erreur si les informations de connexion sont invalides
+  error.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
+}
+  
 });
