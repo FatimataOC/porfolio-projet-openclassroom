@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,27 +14,25 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script type="module" src="./assets/index.js" defer></script>
-    <Script type="module" src="modules/modal.js" defer></Script>
+    <script type="module" src="./modules/modal.js" defer></script>
   </head>
+
   <body>
-    <div class="barreNoir">
-      <div class="btnModifier">
-        <i class="fas fa-pen-to-square"></i>
-        <span>Mode édition</span>
-      </div>
-      <button class="btn">publier les changements</button>
+    <div class="edit_banner hidden">
+      <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+      <p>Mode édition</p>
     </div>
     <header>
-      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-      <nav>
-        <ul>
-          <li>projets</li>
-          <li>contact</li>
-         <a href="./login.html"><li>login</li></a>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-        </ul>
-      </nav>
-    </header>
+          <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+          <nav>
+            <ul>
+              <a href="#portfolio" class="btnProjets"><li>projets</li></a>
+              <a href="#contact" class="btncontact"><li>contact</li></a>
+              <a id="login" href="./login.html"><li>login</li></a>
+              <a href=""><li><img src="./assets/icons/instagram.png" alt="Instagram"></li></a>
+            </ul>
+          </nav>
+      </header>
     <main>
       <section id="introduction">
         <figure>
@@ -59,13 +58,61 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
-        <div class="button-filter">
-          <button class="filter-all">Tous</button>
-          <!--ajout du bouton tous-->
-        </div>
-        <div class="gallery"></div>
-      </section>
+          <div class="works_title">
+            <h2>Mes Projets</h2>
+            <div class="div_modifier hidden">
+              <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+              <a href="#" class="modifier">modifier</a>
+            </div>
+          </div>
+          <aside class="modal hidden" aria-hidden="true">
+            <div class="modal_gallery">
+              <div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
+              <h2 id="modal_title1">Galerie photo</h2>
+              <div class="modal_works">
+                <!-- Travaux ajoutés dynamiquement depuis l'API  -->
+              </div>
+              <hr>
+              <button class="add_photo">Ajouter une photo</button>
+              <a href="#" class="delete_gallery">Supprimer la galerie</a>
+            </div>
+            <!-- Modale d'ajout de projet -->
+				<div class="modal_add_photo hidden">
+					<div class="modal_return"><i class="fa-solid fa-arrow-left"></i></div>
+					<div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
+					<h2 id="modal_title2">Ajout photo</h2>
+					<form action="#" method="post" id="add">
+						<div class="add_box">
+							<div class="preview_div">
+								<img id="previewImg" src="./assets/icons/add_logo.png" alt="photographie">
+							</div>
+							<label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
+							<input id="file" class="hidden" type="file" accept="image/*">
+							<p class="max_size" id="photosub">jpg, png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title" required><br>
+						<label for="category">Catégorie</label>
+						<select name="category" id="category" required>
+							<option value="" disabled>Choisir une Catégorie</option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hotels & restaurants</option>
+						</select>
+
+						<hr>
+
+						<input id="validate" type="submit" value="Valider">
+					</form>
+				</div>
+			</aside>
+      <div class="button-filter hidden">
+        <button class="filter-all">Tous</button>
+        <!--ajout du bouton tous-->
+      </div>
+      <div class="gallery" id="projets"></div>
+		</section>
+       
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
@@ -80,7 +127,6 @@
         </form>
       </section>
     </main>
-
     <footer>
       <nav>
         <ul>
@@ -88,5 +134,4 @@
         </ul>
       </nav>
     </footer>
-  </body>
-</html>
+   

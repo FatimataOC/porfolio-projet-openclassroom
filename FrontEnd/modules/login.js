@@ -15,7 +15,6 @@ formEl.addEventListener('submit', async (event) => {
     },
     body: JSON.stringify({ email, password })
   });
-
   if (response.status === 200) {
     // récupérer le jeton d'authentification depuis la réponse de l'API
     const token = await response.json();
