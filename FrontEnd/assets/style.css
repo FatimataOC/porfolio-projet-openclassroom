@@ -266,6 +266,7 @@ li:hover {
 	overflow: auto;
 	border-radius: 10px;
 	width: 630px;
+	height: 700px;
 }
 
 .modal_add_photo {
@@ -310,20 +311,6 @@ li:hover {
 	width: 17px;
 	height: 17px;
 	cursor: pointer;
-}
-
-.move {
-	display: none;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	top: 6px;
-	right: 27px;
-	color: white;
-	background-color: black;
-	border-radius: 2px;
-	width: 17px;
-	height: 17px;
 }
 
 .modal_works .figure:hover .move {
@@ -413,12 +400,6 @@ hr {
 	cursor: pointer;
 }
 
-.max_size {
-	font-size: 10px;
-	font-weight: 400;
-	color: #444444;
-}
-
 .add_box {
 	display: flex;
 	flex-direction: column;
@@ -461,16 +442,6 @@ hr {
 #validate:disabled {
 	background-color: #A7A7A7;
 }
-
-.delete_gallery {
-	text-decoration: none;
-	color: #D65353;
-	font-size: 14px;
-	font-weight: 400;
-	font-family: 'Syne';
-	margin-bottom: 48px;
-}
-
 
 /*style login*/
 
