@@ -58,50 +58,48 @@
         </article>
       </section>
       <section id="portfolio">
-          <div class="works_title">
-            <h2>Mes Projets</h2>
-            <div class="div_modifier hidden">
-              <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-              <a href="#" class="modifier">modifier</a>
-            </div>
+        <div class="works_title">
+          <h2>Mes Projets</h2>
+          <div class="div_modifier hidden">
+            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+            <a href="#" class="modifier">modifier</a>
           </div>
+        </div>
           <aside class="modal hidden" aria-hidden="true">
             <div class="modal_gallery">
               <div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
               <h2 id="modal_title1">Galerie photo</h2>
               <div class="modal_works">
-                <!-- Travaux ajoutés dynamiquement depuis l'API  -->
+              <!-- Travaux ajoutés dynamiquement depuis l'API  -->
               </div>
               <hr>
               <button class="add_photo">Ajouter une photo</button>
             </div>
-            <!-- Modale d'ajout de projet -->
-				<div class="modal_add_photo hidden">
-					<div class="modal_return"><i class="fa-solid fa-arrow-left"></i></div>
-					<div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
-					<h2 id="modal_title2">Ajout photo</h2>
-					<form action="#" method="post" id="add">
-						<div class="add_box">
-							<div class="preview_div">
-								<img id="previewImg" src="./assets/icons/add_logo.png" alt="photographie">
-							</div>
-							<label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
-							<input id="file" class="hidden" type="file" accept="image/*">
-						</div>
-						<label for="title">Titre</label>
-						<input type="text" name="title" id="title" required><br>
-						<label for="category">Catégorie</label>
-						<select name="category" id="category" required>
-							<option value="" disabled>Choisir une Catégorie</option>
-							<option value="1">Objets</option>
-							<option value="2">Appartements</option>
-							<option value="3">Hotels & restaurants</option>
-						</select>
-						<hr>
-						<input id="validate" type="submit" value="Valider">
-					</form>
-				</div>
-			</aside>
+              <!-- Modale d'ajout de projet -->
+				    <div class="modal_add_photo hidden">
+					    <div class="modal_return"><i class="fa-solid fa-arrow-left"></i></div>
+					    <div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
+					    <h2 id="modal_title2">Ajout photo</h2>
+					    <form action="#" method="post" id="add">
+						    <div class="add_box">
+							    <div class="preview_div"></div>
+							    <label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
+							    <input id="file" class="hidden" type="file" accept="image/*">
+						    </div>
+						    <label for="title">Titre</label>
+						    <input type="text" name="title" id="title" required><br>
+						    <label for="category">Catégorie</label>
+						    <select name="category" id="category" required>
+							    <option value="" disabled>Choisir une Catégorie</option>
+							    <option value="1">Objets</option>
+							    <option value="2">Appartements</option>
+							    <option value="3">Hotels & restaurants</option>
+						    </select>
+						    <hr>
+						    <input id="validate" type="submit" value="Valider">
+					    </form>
+				    </div>
+          </aside>
       <div class="button-filter">
         <button class="filter-all">Tous</button>
         <!--ajout du bouton tous-->

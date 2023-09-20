@@ -182,9 +182,12 @@ li:hover {
 
 #portfolio .button-filter {
 	display: flex;
+	flex-direction: row;
+	align-items: center;
 	justify-content: center;
-	gap: 15px;
-	margin: 51px 0;
+	gap: 10px;
+	margin: 51px auto;
+	
 }
 
 #portfolio .button-filter button {
@@ -265,8 +268,8 @@ li:hover {
 	border: 1px solid white;
 	overflow: auto;
 	border-radius: 10px;
-	width: 630px;
-	height: 700px;
+	width: 500px;
+	height: 97%;
 }
 
 .modal_add_photo {
@@ -278,7 +281,8 @@ li:hover {
 	border: 1px solid white;
 	overflow: auto;
 	border-radius: 10px;
-	width: 630px;
+	width: 500px;
+	height: 97%;
 	
 }
 
@@ -313,10 +317,6 @@ li:hover {
 	cursor: pointer;
 }
 
-.modal_works .figure:hover .move {
-	display: flex;
-}
-
 .trash i,
 .move i {
 	font-size: 11px;
@@ -344,11 +344,6 @@ li:hover {
 	cursor: pointer;
 }
 
-.modal_content p {
-	font-size: 26px;
-	margin-top: 60px;
-	margin-bottom: 46px;
-}
 
 #modal_title1,
 #modal_title2 {
@@ -373,9 +368,9 @@ hr {
 	font-size: 14px;
 	color: white;
 	background-color: #1D6154;
-	margin: 2em auto;
+	margin: 15px auto;
 	width: 237px;
-	height: 36px;
+	height: 42px;
 	text-align: center;
 	border: none;
 	border-radius: 60px;

@@ -26,6 +26,7 @@ function genererWorks(works) {
   }
 }
 
+
 //premier affichage de la page
 genererWorks(works);
 
@@ -39,7 +40,6 @@ function genererCategories(categories) {
     const filter = categories[i];
     // Récupération de l'élément du DOM qui accueillera les traveaux
     const sectionFilter = document.querySelector(".button-filter");
-
     // Création de la balise button
     const buttonElement = document.createElement("button");
     buttonElement.innerText = filter.name; // on met les noms des catégories pour chaque boutons
