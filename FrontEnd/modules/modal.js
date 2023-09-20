@@ -55,6 +55,35 @@ openModalBtn.forEach(function (lien) {
   });
 });
 
+// Vider le contenu de la modale
+function clearModalContent() {
+  // Le scroll de l'arrière plan est ré-activé
+  document.body.style.overflow = 'auto';
+};
+
+// Modale galerie - Fermeture - Croix
+closeModalBtn.forEach(function (lien) {
+  lien.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+      modal.setAttribute("aria-modal", "false");
+      clearModalContent();
+  });
+});
+
+// Modale galerie - Fermeture - En dehors
+function closeModalOutside(event) {
+  // Si le clic est en dehors du contenu de la modale
+  if (event.target === modal) {
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+      modal.setAttribute("aria-modal", "false");
+      clearModalContent();
+  };
+};
+
+// Fermeture au clic en dehors de la modale
+window.addEventListener('click', closeModalOutside);
 function genererWorks(works) {
   //création de la boucle qui  debute a 0 a et se termine a 11 (correspond aux images de la gallerie)
   for (let i = 0; i < works.length; i++) {
