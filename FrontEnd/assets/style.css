@@ -302,7 +302,7 @@ li:hover {
 	position: relative;
 }
 
-.trash {
+.trash{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -317,8 +317,7 @@ li:hover {
 	cursor: pointer;
 }
 
-.trash i,
-.move i {
+.trash i{
 	font-size: 11px;
 }
 

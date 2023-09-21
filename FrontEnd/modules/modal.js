@@ -56,7 +56,7 @@ openModalBtn.forEach(function (lien) {
 });
 
 // Vider le contenu de la modale
-function clearModalContent() {
+function closemodal() {
   // Le scroll de l'arrière plan est ré-activé
   document.body.style.overflow = 'auto';
 };
@@ -67,7 +67,7 @@ closeModalBtn.forEach(function (lien) {
       modal.classList.add("hidden");
       modal.setAttribute("aria-hidden", "true");
       modal.setAttribute("aria-modal", "false");
-      clearModalContent();
+      closemodal();
   });
 });
 
@@ -117,7 +117,6 @@ function genererWorks(works) {
     galleryelements.appendChild(trash)
   }
 }
-//premier affichage de la page
 genererWorks(works);
 
 // Récupération du Token d'authentification
@@ -146,8 +145,7 @@ async function deleteWork(workId) {
   };
 };
 
-// Passage de la "MODALE" en mode formulaire d'ajout de projet si clique sur le bouton "Ajouter une photo" de la partie "Gallerie / suppresion de projet" de la "MODALE".
-// Ajout du Listener sur le bouton "Ajouter une photo" et SWITCH de la "MODALE" si cliqué.
+// Si on clique sur le bouton "Ajouter une photo" affiche modal_add_photo
 const addPhotoButton = document.querySelector(".add_photo");
 
 addPhotoButton.addEventListener("click", function () {
@@ -156,3 +154,44 @@ addPhotoButton.addEventListener("click", function () {
     const modalFormSwitch = document.querySelector(".modal_add_photo");
     modalFormSwitch.style.display = "flex";
 });
+
+// En cliquant sur la fléche precédente retour sur la modale gallerie
+
+const returnModaleGallery = document.querySelector(".modal_return")
+  returnModaleGallery.addEventListener("click", function () {
+  const modalFormSwitch = document.querySelector(".modal_add_photo");
+  modalFormSwitch.style.display = "none";
+  const sectionGallery = document.querySelector(".modal_works");
+  sectionGallery.style.display = "flex";
+  
+});
+
+// Gestion du "PREVIEW" de l'image choisie de "L'AJOUT DE PROJET" de la "MODALE".
+// Vérification de la taille du fichier et extensions autorisées définies dans le HTML.
+const projectPhotoFileAddInputFormModale = document.querySelector("#file");
+
+projectPhotoFileAddInputFormModale.addEventListener("change", function () {
+
+    // Vérification de la taille du fichier image soumis dans le champs de la "MODALE".
+    if (projectPhotoFileAddInputFormModale.files[0].size <= 4 * 1024 * 1024) {
+
+        // Réinitialisation de la zone "project-photo-file-add-container" du DOM
+        const projectPhotoFileAddContainer = document.querySelector(".add_box");
+        projectPhotoFileAddContainer.innerHTML = "";
+        // Création d'un élément "IMG" pour afficher la "PREVIEW" de l'image choisie.
+        const projectPhotoFilePreviewFormModale = document.createElement("img");
+        projectPhotoFilePreviewFormModale.src = URL.createObjectURL(projectPhotoFileAddInputFormModale.files[0]);
+        projectPhotoFilePreviewFormModale.className = "project-photo-file-preview-form-modale";
+        // Rattachement de la balise "IMG".
+        projectPhotoFileAddContainer.appendChild(projectPhotoFilePreviewFormModale);
+
+        // Ajout d'un listerner pour donner la possibilité de choisir une autre image en cas d'erreur de choix.
+        projectPhotoFilePreviewFormModale.addEventListener("click", function () {
+            projectPhotoFileAddInputFormModale.click();
+        });
+    } else {
+        projectPhotoFileAddInputFormModale.value = "";
+        return alert("Taille de l'image supérieure à 4mo.")
+    };
+});
+
