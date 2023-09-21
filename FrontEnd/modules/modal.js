@@ -4,7 +4,7 @@ const works = await reponse.json();
 /***** MODALES *****/
 
 // Appel du token
-const authUser = localStorage.getItem("userId");
+const authUser = localStorage.getItem("token");
 
 // Modifications de l'accueil lorsque administrateur
 if (authUser) {
@@ -104,7 +104,8 @@ function genererWorks(works) {
      trash.setAttribute("class", "trash");
      trash.innerHTML = `<i class="fa-regular fa-trash-can" aria-hidden="true"></i>`;
         // Ajout des écouteurs sur les "butons corbeilles" de la "Gallerie" de la "Modale" pour pouvoir supprimer des "Projets".
-        trash.addEventListener("click", function () {
+        trash.addEventListener("click", function (event) {
+          event.preventDefault()
             // Appel de la fonction "deleteWork" pour supprimer le projet (work.id) en fonction du bouton "Trash" cliqué.
             deleteWork(work.id);
         });
@@ -162,36 +163,9 @@ const returnModaleGallery = document.querySelector(".modal_return")
   const modalFormSwitch = document.querySelector(".modal_add_photo");
   modalFormSwitch.style.display = "none";
   const sectionGallery = document.querySelector(".modal_works");
-  sectionGallery.style.display = "flex";
+  sectionGallery.style.display = "grid";
   
 });
 
-// Gestion du "PREVIEW" de l'image choisie de "L'AJOUT DE PROJET" de la "MODALE".
-// Vérification de la taille du fichier et extensions autorisées définies dans le HTML.
-const projectPhotoFileAddInputFormModale = document.querySelector("#file");
 
-projectPhotoFileAddInputFormModale.addEventListener("change", function () {
-
-    // Vérification de la taille du fichier image soumis dans le champs de la "MODALE".
-    if (projectPhotoFileAddInputFormModale.files[0].size <= 4 * 1024 * 1024) {
-
-        // Réinitialisation de la zone "project-photo-file-add-container" du DOM
-        const projectPhotoFileAddContainer = document.querySelector(".add_box");
-        projectPhotoFileAddContainer.innerHTML = "";
-        // Création d'un élément "IMG" pour afficher la "PREVIEW" de l'image choisie.
-        const projectPhotoFilePreviewFormModale = document.createElement("img");
-        projectPhotoFilePreviewFormModale.src = URL.createObjectURL(projectPhotoFileAddInputFormModale.files[0]);
-        projectPhotoFilePreviewFormModale.className = "project-photo-file-preview-form-modale";
-        // Rattachement de la balise "IMG".
-        projectPhotoFileAddContainer.appendChild(projectPhotoFilePreviewFormModale);
-
-        // Ajout d'un listerner pour donner la possibilité de choisir une autre image en cas d'erreur de choix.
-        projectPhotoFilePreviewFormModale.addEventListener("click", function () {
-            projectPhotoFileAddInputFormModale.click();
-        });
-    } else {
-        projectPhotoFileAddInputFormModale.value = "";
-        return alert("Taille de l'image supérieure à 4mo.")
-    };
-});
 
