@@ -356,6 +356,7 @@ li:hover {
 hr {
 	width: 420px;
 	border-top: 1px solid #B3B3B3;
+	margin-top: 20px;
 }
 
 .add_photo {
@@ -377,8 +378,49 @@ hr {
 	cursor: pointer;
 }
 
-.inner_add_photo {
+#inner_add_photo {
 	display: flex;
+	
+}
+
+.add_box {
+	display: flex;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	border-radius: 3px;
+	margin-top: 36px;
+}
+
+
+#img-container{
+	background: #E8F1F6;
+	width: 65%;
+	height: 169px;
+	border-radius: 3px;
+	text-align: center;
+	margin: 0 auto 10px auto;
+	position: relative;
+	padding-bottom: 11px;
+}
+#img-container .fa-image{
+	display: block;
+	color: #B9C5CC;
+	font-size: 60px;
+	padding-top: 25px;
+	margin-bottom: 20px;
+}
+#img-container label{
+	display: inline-block;
+	font-family: 'Syne';
+	color: #306685;
+	background-color: #CBD6DC;
+	padding: 10px 33px;
+	border-radius: 50px;
+}
+#inner_add_photo{
+	display: none;
 	align-items: center;
 	justify-content: center;
 	font-family: 'Work Sans';
@@ -394,24 +436,38 @@ hr {
 	cursor: pointer;
 }
 
-.add_box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: #E8F1F6;
-	width: 420px;
-	height: 169px;
-	border-radius: 3px;
-	margin-top: 36px;
+
+#img-container p{
+	margin-top: 7px;
+	font-size: 10px;
+}
+.input-title-category{
+	margin-bottom: 20px;
+	text-align: center;
+}
+.input-title-category label{
+	display: block;
+	margin-bottom: 10px;
+}
+.input-title-category input, 
+.input-title-category select{
+	width: 65%;
+	height: 51px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
 }
 
-#previewImg {
-	max-height: 169px;
+#category-option , #title {
+	background-color: white;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	font-size: 2em;
 }
 
-.preview_div {
-	display: flex;
+.title {
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #validate {
@@ -425,7 +481,7 @@ hr {
 	background-color: #1D6154;
 	margin: 2em auto;
 	width: 237px;
-	height: 36px;
+	padding: 15px;
 	text-align: center;
 	border: none;
 	border-radius: 60px;

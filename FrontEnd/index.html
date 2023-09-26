@@ -81,33 +81,34 @@
 					    <div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
 					    <h2 id="modal_title2">Ajout photo</h2>
 					    <form action="#" method="post" id="add">
-						    <div class="add_box">
-							    <div class="preview_div"></div>
-							    <label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
-							    <input id="file" class="hidden" type="file" accept="image/*required accept=.jpg, .png">
-						      <p class="project-photo-file-add-description">jpg, png : 4mo max</p>
-						    </div>
-						    <label for="title">Titre</label>
-						    <input type="text" name="title" id="title" required><br>
-						    <label for="category">Catégorie</label>
-						    <select name="category" id="category" required>
-							    <option value="" disabled>Choisir une Catégorie</option>
-							    <option value="1">Objets</option>
-							    <option value="2">Appartements</option>
-							    <option value="3">Hotels & restaurants</option>
-						    </select>
-						    <hr>
-						    <input id="validate" type="submit" value="Valider">
-					    </form>
-				    </div>
+                <div class="add_box">
+                  <div id="img-container">
+                    <i class="fa-solid fa-image"></i>
+                    <label for="inner_add_photo" for="file" class="photolab">+ Ajouter photo
+                      <input id="file" id = "inner_add_photo" class="hidden" type="file" accept=".png, .jpg">
+                    </label>
+                    <p class="max_size" id="photosub">jpg, png : 4mo max</p>
+                  </div>
+                <label class="title" for="title">Titre</label>
+                <input type="text" name="title" id="title" required><br>
+                <label class="title" for="category-option">Catégorie</label>
+                <select id="category-option">
+                <!---liste option-->
+                <option></option>
+                </select>
+    
+                <hr>
+    
+                <input id="validate" type="submit" value="Valider">
+              </form>
+            </div>
           </aside>
       <div class="button-filter">
         <button class="filter-all">Tous</button>
         <!--ajout du bouton tous-->
       </div>
-      <div class="gallery" id="projects"></div>
-		</section>
-       
+      <div class="gallery" id="projets"></div>
+	 	</section>
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>

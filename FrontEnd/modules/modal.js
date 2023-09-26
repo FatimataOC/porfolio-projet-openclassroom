@@ -1,10 +1,11 @@
+
 // recuperation des travaux depuis api
 const reponse = await fetch("http://localhost:5678/api/works/");
 const works = await reponse.json();
 /***** MODALES *****/
 
 // Appel du token
-const authUser = localStorage.getItem("token");
+const authUser = localStorage.getItem("userId");
 
 // Modifications de l'accueil lorsque administrateur
 if (authUser) {
@@ -56,7 +57,9 @@ openModalBtn.forEach(function (lien) {
 });
 
 // Vider le contenu de la modale
-function closemodal() {
+function clearModalContent() {
+  // Supprimer le contenu HTML
+  modalWorksDisplay.innerHTML = "";
   // Le scroll de l'arrière plan est ré-activé
   document.body.style.overflow = 'auto';
 };
@@ -67,7 +70,7 @@ closeModalBtn.forEach(function (lien) {
       modal.classList.add("hidden");
       modal.setAttribute("aria-hidden", "true");
       modal.setAttribute("aria-modal", "false");
-      closemodal();
+      clearModalContent();
   });
 });
 
@@ -84,6 +87,10 @@ function closeModalOutside(event) {
 
 // Fermeture au clic en dehors de la modale
 window.addEventListener('click', closeModalOutside);
+// Déclaration du conteneur des projets pour la modale
+
+const modalWorksDisplay = document.querySelector(".modal_works");
+
 function genererWorks(works) {
   //création de la boucle qui  debute a 0 a et se termine a 11 (correspond aux images de la gallerie)
   for (let i = 0; i < works.length; i++) {
@@ -104,8 +111,7 @@ function genererWorks(works) {
      trash.setAttribute("class", "trash");
      trash.innerHTML = `<i class="fa-regular fa-trash-can" aria-hidden="true"></i>`;
         // Ajout des écouteurs sur les "butons corbeilles" de la "Gallerie" de la "Modale" pour pouvoir supprimer des "Projets".
-        trash.addEventListener("click", function (event) {
-          event.preventDefault()
+        trash.addEventListener("click", function () {
             // Appel de la fonction "deleteWork" pour supprimer le projet (work.id) en fonction du bouton "Trash" cliqué.
             deleteWork(work.id);
         });
@@ -163,9 +169,43 @@ const returnModaleGallery = document.querySelector(".modal_return")
   const modalFormSwitch = document.querySelector(".modal_add_photo");
   modalFormSwitch.style.display = "none";
   const sectionGallery = document.querySelector(".modal_works");
-  sectionGallery.style.display = "grid";
+  sectionGallery.style.display = "flex";
   
 });
+  
+/************************************** MODALE AJOUT PHOTO *******************************************/
+      
+// Modale ajout de photo - Déclarations
+const modalGallery = document.querySelector(".modal_gallery");
+const modalAddPhoto = document.querySelector(".modal_add_photo");
+const addPhotoBtn = document.querySelector(".add_photo");
+const returnModalBtn = document.querySelector(".modal_return");
 
+// Modale ajout de photo - Ouverture
+addPhotoBtn.addEventListener("click", () => {
+    modalGallery.classList.add("hidden");
+    modalAddPhoto.classList.remove("hidden");
+});
 
+// Modale ajout de photo - Retour vers modale galerie
+returnModalBtn.addEventListener("click", () => {
+    modalGallery.classList.remove("hidden");
+    modalAddPhoto.classList.add("hidden");
+});
+// Récupérer la liste déroulante
+const categorySelect = document.getElementById("category-option");
+
+// Récupérer les catégories depuis l'API
+fetch("http://localhost:5678/api/categories")
+  .then(response => response.json())
+  .then(data => {
+    // Parcourir les catégories et créer une option pour chaque catégorie
+    for (let i = 0; i < data.length; i++) {
+      let option = document.createElement("option");
+      option.value = data[i].id;
+      option.text = data[i].name;
+      categorySelect.appendChild(option);
+    }
+  })
+  .catch(error => console.error(error));
 
