@@ -4,8 +4,9 @@ const reponse = await fetch("http://localhost:5678/api/works/");
 const works = await reponse.json();
 /***** MODALES *****/
 
+
 // Appel du token
-const authUser = localStorage.getItem("userId");
+const authUser = localStorage.getItem("token");
 
 // Modifications de l'accueil lorsque administrateur
 if (authUser) {
@@ -94,18 +95,22 @@ const modalWorksDisplay = document.querySelector(".modal_works");
 function genererWorks(works) {
   //création de la boucle qui  debute a 0 a et se termine a 11 (correspond aux images de la gallerie)
   for (let i = 0; i < works.length; i++) {
-    // on recupére l'élément du DOM qui accueillera les traveaux
-    const sectionGallery = document.querySelector(".modal_works");
-    // Création des balises
-    const galleryelements = document.createElement("figure");
-    const work = works[i];
-    galleryelements.dataset.id = work.id;
-    // Ajout icone 'supprimer'
-    galleryelements.setAttribute("class", "figure");
-    // Ajout d'une image
-    const imageElement = document.createElement("img");
-    imageElement.src = work.imageUrl;
-    imageElement.alt = work.title;
+  // Création d'un article et apport du contenu dynamique
+  // on recupére l'élément du DOM qui accueillera les traveaux
+  const sectionGallery = document.querySelector(".modal_works");
+  // Attribution d'un ID
+  const galleryelements = document.createElement("figure");
+  const work = works[i];
+  galleryelements.dataset.id = work.id;
+  // Attribution d'une class
+  galleryelements.setAttribute("class", "figure");
+  // Ajout d'une image
+  const imageElement = document.createElement("img");
+  imageElement.src = work.imageUrl;
+  imageElement.alt = work.title;
+  // Ajout d'un sous-titre
+  const subtitle = document.createElement("figcaption");
+  subtitle.innerText = "éditer";
      // Ajout icone 'supprimer'
      const trash = document.createElement("div");
      trash.setAttribute("class", "trash");
@@ -192,6 +197,7 @@ returnModalBtn.addEventListener("click", () => {
     modalGallery.classList.remove("hidden");
     modalAddPhoto.classList.add("hidden");
 });
+
 // Récupérer la liste déroulante
 const categorySelect = document.getElementById("category-option");
 
@@ -208,4 +214,29 @@ fetch("http://localhost:5678/api/categories")
     }
   })
   .catch(error => console.error(error));
+ // Fonction pour montrer un preview de l'image
+function showPreview(event) {
+  if (event.target.files.length > 0) {
+      const src = URL.createObjectURL(event.target.files[0]);
+      const preview = document.getElementById("previewImg");
+      preview.src = src;
+      const addBoxLabel = document.querySelector("photolab");
+      addBoxLabel.style.display = "none";
+      const addBoxSub = document.getElementById("photosub");
+      addBoxSub.style.display = "none";
+  };
+};
 
+const fileInput = document.getElementById("file");
+fileInput.addEventListener("change", showPreview);
+
+// Déclaration de l'URL pour la requête fetch post
+const urlAddWork = "http://localhost:5678/api/works";
+
+// Déclaration du formulaire
+const addWorkForm = document.getElementById("add");
+const sendBtn = document.getElementById("validate");
+
+// On écoute l'évenement lors de l'envoi du projet
+addWorkForm.addEventListener("submit", (event) => {
+})

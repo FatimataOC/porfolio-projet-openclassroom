@@ -82,15 +82,13 @@
 					    <h2 id="modal_title2">Ajout photo</h2>
 					    <form action="#" method="post" id="add">
                 <div class="add_box">
-                  <div id="img-container">
-                    <i class="fa-solid fa-image"></i>
-                    <label for="inner_add_photo" for="file" class="photolab">+ Ajouter photo
-                      <input id="file" id = "inner_add_photo" class="hidden" type="file" accept=".png, .jpg">
-                    </label>
-                    <p class="max_size" id="photosub">jpg, png : 4mo max</p>
-                  </div>
-                <label class="title" for="title">Titre</label>
-                <input type="text" name="title" id="title" required><br>
+                  <i class="fa-solid fa-image"></i>
+                  <label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
+                  <input id="file" class="hidden" type="file" accept=".png, .jpg">
+                  <p class="max_size" id="photosub">jpg, png : 4mo max</p>
+                 </div>
+             <label for="title">Titre</label>
+             <input type="text" name="title" id="title" required><br> 
                 <label class="title" for="category-option">Catégorie</label>
                 <select id="category-option">
                 <!---liste option-->
