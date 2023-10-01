@@ -213,12 +213,6 @@ li:hover {
 	transform: scale(1.1);
 }
 
-.project {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 #introduction .div_modifier {
 	margin-top: 15px;
 	margin-left: 10%;
@@ -237,9 +231,8 @@ li:hover {
 .div_modifier {
 	display: flex;
 	flex-direction: row;
-	gap: 12px;
 	text-decoration: none;
-	color: black;
+	padding-bottom: 20px;
 }
 
 .modifier {
@@ -270,20 +263,6 @@ li:hover {
 	border-radius: 10px;
 	width: 500px;
 	height: 97%;
-}
-
-.modal_add_photo {
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: white;
-	border: 1px solid white;
-	overflow: auto;
-	border-radius: 10px;
-	width: 500px;
-	height: 97%;
-	
 }
 
 .modal_works {
@@ -326,6 +305,22 @@ li:hover {
 	font-weight: 400;
 	margin-top: 2px;
 }
+
+.modal_add_photo {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+	border: 1px solid white;
+	overflow: auto;
+	border-radius: 10px;
+	width: 500px;
+	height: 97%;
+	
+}
+
+
 
 .modal_close {
 	position: absolute;

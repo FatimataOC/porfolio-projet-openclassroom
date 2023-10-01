@@ -6,8 +6,8 @@ const works = await reponse.json();
 
 
 // Appel du token
-const authUser = localStorage.getItem("token");
-
+const authUser = localStorage.getItem("userId");
+const token = localStorage.getItem("token");
 // Modifications de l'accueil lorsque administrateur
 if (authUser) {
     // Le bouton login devient logout
@@ -137,7 +137,7 @@ async function deleteWork(workId) {
   const deleteResponse = await fetch("http://localhost:5678/api/works/" + workId, {
       method: "DELETE",
       headers: {
-          "Authorization": "Bearer "  + authUser
+          "Authorization": "Bearer "  + token
       },
   });
 
@@ -157,27 +157,6 @@ async function deleteWork(workId) {
   };
 };
 
-// Si on clique sur le bouton "Ajouter une photo" affiche modal_add_photo
-const addPhotoButton = document.querySelector(".add_photo");
-
-addPhotoButton.addEventListener("click", function () {
-  const sectionGallery = document.querySelector(".modal_works");
-    sectionGallery.style.display = "none";
-    const modalFormSwitch = document.querySelector(".modal_add_photo");
-    modalFormSwitch.style.display = "flex";
-});
-
-// En cliquant sur la fléche precédente retour sur la modale gallerie
-
-const returnModaleGallery = document.querySelector(".modal_return")
-  returnModaleGallery.addEventListener("click", function () {
-  const modalFormSwitch = document.querySelector(".modal_add_photo");
-  modalFormSwitch.style.display = "none";
-  const sectionGallery = document.querySelector(".modal_works");
-  sectionGallery.style.display = "flex";
-  
-});
-  
 /************************************** MODALE AJOUT PHOTO *******************************************/
       
 // Modale ajout de photo - Déclarations
@@ -199,8 +178,7 @@ returnModalBtn.addEventListener("click", () => {
 });
 
 // Récupérer la liste déroulante
-const categorySelect = document.getElementById("category-option");
-
+const categorySelect = document.getElementById("category-option")
 // Récupérer les catégories depuis l'API
 fetch("http://localhost:5678/api/categories")
   .then(response => response.json())
@@ -214,13 +192,14 @@ fetch("http://localhost:5678/api/categories")
     }
   })
   .catch(error => console.error(error));
- // Fonction pour montrer un preview de l'image
+
+// Fonction pour montrer un preview de l'image
 function showPreview(event) {
   if (event.target.files.length > 0) {
       const src = URL.createObjectURL(event.target.files[0]);
       const preview = document.getElementById("previewImg");
       preview.src = src;
-      const addBoxLabel = document.querySelector("photolab");
+      const addBoxLabel = document.getElementById("photolab");
       addBoxLabel.style.display = "none";
       const addBoxSub = document.getElementById("photosub");
       addBoxSub.style.display = "none";
@@ -230,13 +209,68 @@ function showPreview(event) {
 const fileInput = document.getElementById("file");
 fileInput.addEventListener("change", showPreview);
 
-// Déclaration de l'URL pour la requête fetch post
-const urlAddWork = "http://localhost:5678/api/works";
-
 // Déclaration du formulaire
 const addWorkForm = document.getElementById("add");
 const sendBtn = document.getElementById("validate");
 
 // On écoute l'évenement lors de l'envoi du projet
 addWorkForm.addEventListener("submit", (event) => {
-})
+
+const fileInput = document.getElementById("file");
+fileInput.addEventListener("change", showPreview);
+
+    // On empêche le refresh de la page par défaut
+    event.preventDefault();
+
+    // Affichage erreur si input image vide
+    if (fileInput.value === "") {
+        alert("Veuillez fournir une image.");
+    };
+
+    // Déclaration des valeurs à lier à l'objet
+    const addImg = document.getElementById("file").files[0];
+    const addTitle = document.getElementById("title").value;
+    const categorySelect = document.getElementById("category-option").value;
+    console.log(addImg, addTitle,categorySelect);
+
+    // Déclaration de l'objet à envoyer
+    const formData = new FormData();
+    formData.append("image", addImg);
+    formData.append("title", addTitle);
+    formData.append("category", categorySelect)
+    console.log(formData);
+
+
+// Effectuer la requête pour envoyer l'image à l'API
+  fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: {
+      "accept": "*/*",
+      "Authorization": `Bearer ${token}`
+    },
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'envoi de l'image");
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Créer les éléments à ajouter dans le DOM
+    createGalleryItem(title.value, data.imageUrl);
+
+    // Réinitialiser le formulaire
+    resetForm();
+    // Masquer la modal-addwork
+    modalGallery.style.display = "none";
+    // Afficher la modal-content
+    modalAddPhoto.style.display = "block";
+    // Ajouter un message de succès
+    showMessage("L'image a été envoyée avec succès!", "success");
+  })
+
+  .catch(error => {
+  console.error(error);
+  });
+});

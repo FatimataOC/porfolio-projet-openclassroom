@@ -70,6 +70,7 @@
               <div class="modal_close"><i class="fa-solid fa-xmark"></i></div>
               <h2 id="modal_title1">Galerie photo</h2>
               <div class="modal_works">
+                <div class="div_gallery"></div>
               <!-- Travaux ajoutés dynamiquement depuis l'API  -->
               </div>
               <hr>
@@ -82,13 +83,14 @@
 					    <h2 id="modal_title2">Ajout photo</h2>
 					    <form action="#" method="post" id="add">
                 <div class="add_box">
-                  <i class="fa-solid fa-image"></i>
+                  <img id="previewImg">
+                  <div class="icon-img hidden"><i class="fa-solid fa-image"></i></div>
                   <label class="inner_add_photo" for="file" id="photolab">+ Ajouter photo</label>
                   <input id="file" class="hidden" type="file" accept=".png, .jpg">
                   <p class="max_size" id="photosub">jpg, png : 4mo max</p>
                  </div>
-             <label for="title">Titre</label>
-             <input type="text" name="title" id="title" required><br> 
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title" required><br> 
                 <label class="title" for="category-option">Catégorie</label>
                 <select id="category-option">
                 <!---liste option-->
