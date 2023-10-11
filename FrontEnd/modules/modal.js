@@ -131,28 +131,31 @@ function genererWorks(works) {
 }
 genererWorks(works);
 
-// Récupération du Token d'authentification
+// Fonction de "Suppresion" de projet de la "Gallery" "Modale".
 async function deleteWork(workId) {
   // Suppression du projet via l'API en fonction de l'ID du Projet (work.id).
   const deleteResponse = await fetch("http://localhost:5678/api/works/" + workId, {
       method: "DELETE",
       headers: {
-          "Authorization": "Bearer "  + token
+          "Authorization": "Bearer " + token
       },
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Erreur lors de la suppression du travail");
-    }
-    // Afficher la modal-works
-    modalWorksDisplay.style.display = "block";
-
-  })
-  .catch(error => {
-    console.error(error);
   });
-}
- 
+
+  // Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
+  if (deleteResponse.ok) {
+      const workToRemove = document.querySelectorAll(`figure[data-id="${workId}"]`);
+
+      for (let i = 0; i < workToRemove.length; i++) {
+          workToRemove[i].remove();
+      };
+      // Suppression de l'élément du tableau "works" correspondant à l'ID du projet.
+      const workIndexToRemove = works.findIndex(work => workId === work.id);
+      works.splice(workIndexToRemove, 1);
+
+  } else {
+      return alert("Échec de la suppression du projet");
+  };
+};
     
 /************************************** MODALE AJOUT PHOTO *******************************************/
       
