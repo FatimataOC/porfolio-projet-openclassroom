@@ -1,4 +1,3 @@
-
 // recuperation des travaux depuis api
 const reponse = await fetch("http://localhost:5678/api/works/");
 const works = await reponse.json();
@@ -88,8 +87,8 @@ function closeModalOutside(event) {
 
 // Fermeture au clic en dehors de la modale
 window.addEventListener('click', closeModalOutside);
-// Déclaration du conteneur des projets pour la modale
 
+// Déclaration du conteneur des projets pour la modale
 const modalWorksDisplay = document.querySelector(".modal_works");
 
 function genererWorks(works) {
@@ -115,11 +114,12 @@ function genererWorks(works) {
      const trash = document.createElement("div");
      trash.setAttribute("class", "trash");
      trash.innerHTML = `<i class="fa-regular fa-trash-can" aria-hidden="true"></i>`;
-        // Ajout des écouteurs sur les "butons corbeilles" de la "Gallerie" de la "Modale" pour pouvoir supprimer des "Projets".
-        trash.addEventListener("click", function () {
-            // Appel de la fonction "deleteWork" pour supprimer le projet (work.id) en fonction du bouton "Trash" cliqué.
-            deleteWork(work.id);
-        });
+      // Ajout des écouteurs sur les "butons corbeilles" de la "Gallerie" de la "Modale" pour pouvoir supprimer des "Projets".
+      trash.addEventListener("click", function () {
+        // Appel de la fonction "deleteWork" pour supprimer le projet (work.id) en fonction du bouton "Trash" cliqué.
+        deleteWork(work.id);
+  
+      });
     const edit = document.createElement("figcaption");
     edit.innerText = "éditer";
     // on rattache la balise article a la section gallerie
@@ -139,24 +139,21 @@ async function deleteWork(workId) {
       headers: {
           "Authorization": "Bearer "  + token
       },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Erreur lors de la suppression du travail");
+    }
+    // Afficher la modal-works
+    modalWorksDisplay.style.display = "block";
+
+  })
+  .catch(error => {
+    console.error(error);
   });
-
-  // Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
-  if (deleteResponse.ok) {
-      const workToRemove = document.querySelectorAll(`figure[data-id="${workId}"]`);
-
-      for (let i = 0; i < workToRemove.length; i++) {
-          workToRemove[i].remove();
-      };
-      // Suppression de l'élément du tableau "works" correspondant à l'ID du projet.
-      const workIndexToRemove = works.findIndex(work => workId === work.id);
-      works.splice(workIndexToRemove, 1);
-
-  } else {
-      return alert("Échec de la suppression du projet");
-  };
-};
-
+}
+ 
+    
 /************************************** MODALE AJOUT PHOTO *******************************************/
       
 // Modale ajout de photo - Déclarations
@@ -209,15 +206,16 @@ function showPreview(event) {
 const fileInput = document.getElementById("file");
 fileInput.addEventListener("change", showPreview);
 
+// Déclaration de l'URL pour la requête fetch post
+const urlAddWork = "http://localhost:5678/api/works";
+
 // Déclaration du formulaire
 const addWorkForm = document.getElementById("add");
-const sendBtn = document.getElementById("validate");
 
 // On écoute l'évenement lors de l'envoi du projet
 addWorkForm.addEventListener("submit", (event) => {
-
-const fileInput = document.getElementById("file");
-fileInput.addEventListener("change", showPreview);
+  const fileInput = document.getElementById("file");
+  fileInput.addEventListener("change", showPreview);  
 
     // On empêche le refresh de la page par défaut
     event.preventDefault();
@@ -231,46 +229,31 @@ fileInput.addEventListener("change", showPreview);
     const addImg = document.getElementById("file").files[0];
     const addTitle = document.getElementById("title").value;
     const categorySelect = document.getElementById("category-option").value;
-    console.log(addImg, addTitle,categorySelect);
+    console.log(addImg, addTitle, categorySelect);
 
     // Déclaration de l'objet à envoyer
     const formData = new FormData();
     formData.append("image", addImg);
     formData.append("title", addTitle);
-    formData.append("category", categorySelect)
+    formData.append("category", categorySelect);
     console.log(formData);
 
+    // Requête fetch méthode POST
+    fetch(urlAddWork, {
+        method: "POST",
+        headers: { "authorization": `Bearer ${token}` },
+        body: formData
+    })
+        // Traitement de la réponse
+        .then(response => {
 
-// Effectuer la requête pour envoyer l'image à l'API
-  fetch("http://localhost:5678/api/works/", {
-    method: "POST",
-    headers: {
-      "accept": "*/*",
-      "Authorization": `Bearer ${token}`
-    },
-    body: formData
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Erreur lors de l'envoi de l'image");
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Créer les éléments à ajouter dans le DOM
-    createGalleryItem(title.value, data.imageUrl);
-
-    // Réinitialiser le formulaire
-    resetForm();
-    // Masquer la modal-addwork
-    modalGallery.style.display = "none";
-    // Afficher la modal-content
-    modalAddPhoto.style.display = "block";
-    // Ajouter un message de succès
-    showMessage("L'image a été envoyée avec succès!", "success");
-  })
-
-  .catch(error => {
-  console.error(error);
-  });
-});
+            if (!response.ok) {
+              throw new Error("Erreur lors de l'envoi de l'image");
+            }
+            return response.json();
+          })
+        
+          .catch(error => {
+          console.error(error);
+          });
+        });     
