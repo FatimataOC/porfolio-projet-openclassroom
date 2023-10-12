@@ -144,13 +144,15 @@ async function deleteWork(workId) {
   // Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
   if (deleteResponse.ok) {
       const workToRemove = document.querySelectorAll(`figure[data-id="${workId}"]`);
-
+      modalWorksDisplay.style.display = "block";
       for (let i = 0; i < workToRemove.length; i++) {
           workToRemove[i].remove();
       };
       // Suppression de l'élément du tableau "works" correspondant à l'ID du projet.
       const workIndexToRemove = works.findIndex(work => workId === work.id);
       works.splice(workIndexToRemove, 1);
+        // Afficher la modal-content
+       
 
   } else {
       return alert("Échec de la suppression du projet");
